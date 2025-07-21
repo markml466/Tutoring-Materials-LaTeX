@@ -1,0 +1,147 @@
+\documentclass[12pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[mathlines]{lineno}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{float}
+\onehalfspacing
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newcommand{\seq}[2]{\left( #1 \right)_{#2 = 1}^{\infty}}
+ \geometry{
+ letterpaper,
+ left=20mm,
+ top=30mm,
+ }
+\usepackage{graphicx}
+
+\begin{document}
+\raggedbottom
+
+\begin{center}\section*{Workshop 6: Heine-Borel Theorem, Topology in $\mathbb{R}^n$}\end{center}
+
+Let's make one thing clear: compact sets are \textbf{not} intuitive. The open cover definition of a compact set is weird and does not, at least at a first glance, justify why we even call a compact set compact. In order to truly understand the nomenclature of a compact set and to gain an intuition behind them, we begin with a brief discussion behind why they are useful. In particular, they are useful for analyzing a new kind of function you are soon to learn: \textbf{uniformly continuous functions}.
+
+Suppose that $E \subseteq \mathbb{R}$ and that $f : E \to \mathbb{R}$ is continuous. This means that for any $\epsilon > 0$ and $x \in E$, we can choose $\delta_x > 0$ such that $|f(x) - f(y)| < \epsilon$ whenever $|x - y| < \delta_x$ for any $y \in E$. This definition is arguably complicated, but let's look at something: \emph{the existence of $\delta_x > 0$ depends on the choice of $x$}. Can we find a $\delta > 0$ that works \emph{independently} of the choice of $x$?
+
+\begin{enumerate}
+    \setlength{\itemsep}{70pt}
+    \item[(a)] Let $\delta = \inf \lbrace \delta_x : x \in E \rbrace$. If $E$ is finite, is $\delta$ positive?
+    \item[(b)] If $E$ is infinite and there exists $\epsilon > 0$ such that for every $\delta > 0$, there is $x, y \in E$ such that $|x - y| < \delta$ and $|f(x) - f(y)| \geq \epsilon$, explain why $\inf \lbrace \delta_x : x \in E \rbrace = 0$. [\emph{Hint}: Try a contradiction.]
+    \item[(c)] Now consider $(x - \delta_x, x + \delta_x) \cap E$, and let $y_1, y_2 \in (x - \delta_x, x + \delta_x) \cap E$. Show that $|f(y_1) - f(y_2)| < 2\epsilon$.
+    \pagebreak
+    \item[(d)] Now suppose there is $x_1, \ldots, x_n$ such that $E \subseteq \bigcup_{i = 1}^{n} (x_i - \delta_{x_i}, x_i + \delta_{x_i})$. Why would this potentially imply that $f$ is both continuous and that the existence of $\delta$ is independent of $x$?
+    \vspace{70pt}
+\end{enumerate}
+
+Notice that in part (d), the key idea is the finiteness in the number of intervals in the union. This leads to the definition of a compact set.
+
+\begin{definition}
+    \emph{Let $E \subseteq \mathbb{R}$. We say that $E$ is \emph{compact} if for every \rule{5cm}{0.15mm} $\lbrace G_{\alpha} \rbrace_{\alpha \in A}$, there is a \rule{5cm}{0.15mm} of $\lbrace G_{\alpha} \rbrace_{\alpha \in A}$.}
+\end{definition}
+
+While not clear yet, a compact set essentially is a set within a particular region that has no \lq\lq punctures". For example, a set like $[0, 1] \cup [2, 3]$ is compact since $[1, 3]$ and $[2, 3]$ is compact, but $[0, 1/2) \cup (1/2, 1]$ is not compact because $1/2$ is a \lq\lq puncture". But do you notice something? The first set discussed is also closed, while the second example is not closed.
+
+\textbf{Question.} Provide an example of a subset of $\mathbb{R}$ that is closed in $\mathbb{R}$ but is not compact.
+\vspace{100pt}
+
+If the example you provided is indeed a compact set, what property do you notice that it has? If you did your work correctly, it should obey the following major theorem.
+
+\begin{theorem}
+    \emph{Let $E \subseteq \mathbb{R}$.
+    \begin{enumerate}
+        \item[(i)] If $E$ is compact, then $E$ is closed and bounded.
+        \item[(ii)] \textbf{(Heine-Borel Theorem)} If $E$ is closed and bounded, then $E$ is compact.
+    \end{enumerate}
+    }
+\end{theorem}
+
+The proof of (i) is in your textbook. We will focus on just the proof of (ii). We follow the proof of the Heine-Borel Theorem in Gaughan's \emph{Introduction to Analysis}.
+\pagebreak
+
+\begin{enumerate}
+    \setlength{\itemsep}{80pt}
+    \item[(a)] Let $E$ be closed and bounded, and let $\lbrace G_\alpha \rbrace_{\alpha \in A}$ be an open cover of $E$. We will suppose for a contradiction that $\lbrace G_\alpha \rbrace_{\alpha \in A}$ has no finite subcover. Because $E$ is bounded, there is some closed interval $[\alpha, \beta]$ such that \ldots
+    \item[(b)] Consider the midpoint $\gamma_0$ of $[\alpha, \beta]$, and consider $[\alpha, \gamma_0] \cap E$ and $[\gamma_0, \beta] \cap E$. Why can't both of these sets be covered by a finite subfamily of $\lbrace G_\alpha \rbrace_{\alpha \in A}$?
+    \item[(c)] Select the interval from above that cannot be covered by a finite subfamily and call it $[\alpha_1, \beta_1]$. What deduction can we make if we choose a midpoint $\gamma_1$ of this interval?
+    \item[(d)] Now you probably see the pattern that is emerging. A particular sequence $\lbrace [\alpha_n, \beta_n] \rbrace_{n = 1}^{\infty}$ has been obtained. Based on the work you did above, answer the following questions:
+    \begin{enumerate}
+        \setlength{\itemsep}{80pt}
+        \item[(i)] Describe $\beta_n - \alpha_n$ in terms of $\beta - \alpha$.
+        \item[(ii)] For any $n \in \mathbb{N}$, what is the \lq\lq smallest" interval is $[\alpha_{n + 1}, \beta_{n + 1}]$ contained inside?
+        \item[(iii)] What property does $[\alpha_n, \beta_n] \cap E$ have with respect to $\lbrace G_{\alpha} \rbrace_{\alpha \in A}$? (\emph{Hint}: Parts (b) and (c)).
+    \end{enumerate}
+    \item[(e)] Using one of (i)-(iii), explain why $[\alpha_n, \beta_n] \cap E$ must be nonempty.
+    \item[(f)] By (e), for every $n \in \mathbb{N}$, there is $x_n \in [\alpha_n, \beta_n] \cap E$, so the set $P := \lbrace x_n : n \in \mathbb{N} \rbrace$ is nonempty. Suppose in one case that $P$ is finite. What is an example of a case where $P$ can indeed be finite?
+    \item[(g)] Continuing from (f), since $P$ is finite, make a conclusion about $\bigcap_{n = 1}^{\infty} ([\alpha_n, \beta_n] \cap E)$. Why can't we use the Nested Interval Property or Compact Nested Interval Property?
+    \item[(h)] Since $\lbrace G_\alpha \rbrace_{\alpha \in A}$ is an open cover for $E$, then use (g) and the definition of an open set in $\mathbb{R}$ to draw a conclusion regarding a particular interval contained within an element of $\lbrace G_\alpha \rbrace_{\alpha \in A}$.
+    \item[(i)] Let $\epsilon > 0$. Given $(1/2^{n})_{n = 1}^{\infty}$ converges to $0$, what conclusion can be drawn regarding $\beta_n - \alpha_n = \dfrac{1}{2^n}(\beta - \alpha)$?
+    \item[(j)] Using (g) and (i), what implication results from letting $x \in [\alpha_n, \beta_n] \cap E$?
+    \item[(k)] Using (h) and (j), draw a conclusion about a set from $\lbrace G_{\alpha} \rbrace_{\alpha \in A}$ that $[\alpha_n, \beta_n] \cap E$ is contained inside.
+    \item[(l)] What contradiction arises as a result of (k)?
+    \vspace{80pt}
+\end{enumerate}
+Note that we still need to consider the case where $P$ is infinite. This is left as an exercise for you in the extra practice section.
+\pagebreak
+\subsection*{Topology on $\mathbb{R}^n$}
+
+\textbf{Question.} When considering the metric topology on $\mathbb{R}^n$, we must understand what a \emph{metric space} is. Given a space $X$ and a function $d : X \times X \to [0, \infty)$ satisfying the following:
+\begin{enumerate}
+    \item[(a)] $d(x, x) = 0$ for all $x \in X$,
+    \item[(b)] $d(x, y) = d(y, x)$ for all $x, y \in X$,
+    \item[(c)] $d(x, z) \leq d(x, y) + d(y, z)$ for all $x, y, z \in X$,
+\end{enumerate}
+we say that $(X, d)$ is a \emph{metric space}, where $d$ is the metric, or distance function, on the space $X$. More often than not, $X$ is used in place of $(X, d)$ when the context is clear.
+\begin{enumerate}
+    \setlength{\itemsep}{150pt}
+    \item[1.] Let $d: \mathbb{R} \times \mathbb{R} \to [0, \infty)$ be given by $d(x, y) = |x - y|$. Using the space below, show that (a), (b), and (c) hold, impyling that $d$ is a metric on $\mathbb{R}$.
+    \item[2.] If we want a metric on $\mathbb{R}^n$, how should we define $d : \mathbb{R}^n \times \mathbb{R}^n \to [0, \infty)$?
+    \item[3.] Using your response from (2), write an appropriate definition for $V_{\epsilon}(\mathbf{x})$ for any $\epsilon > 0$ and $\mathbf{x} \in \mathbb{R}^n$.
+    \item[4.] Using (3), write a definition for a limit point for $\mathbb{R}^n$.
+    \item[5.] Write a definition for a convergent sequence in $\mathbb{R}^n$.
+    \vspace{70pt}
+\end{enumerate}
+
+\begin{exercise}
+    \emph{Let $\lbrace F_n \rbrace_{n = 1}^{\infty}$ be a sequence of nonempty compact subsets of $\mathbb{R}^n$. Assume that $F_{k + 1} \subseteq F_{k}$ for all $k \in \mathbb{N}$. Prove that $\bigcap_{n = 1}^{\infty} F_n \neq \emptyset$.}
+\end{exercise}
+
+\begin{enumerate}
+    \setlength{\itemsep}{100pt}
+    \item[(a)] Reread the definition of a compact set in your textbook. Use this to deduce a reasonable definition for a compact subset of $\mathbb{R}^n$.
+    \item[(b)] Complete the proof of Exercise 1. In order to understand why no steps have been provided, consider the following question: does the proof of the Nested Compact Set Property in the textbook depend in any way on the inherent properties of the choice of the metric space itself?
+\end{enumerate}
+
+\pagebreak
+
+\textbf{Extra Practice}
+
+\begin{enumerate}
+    \item[1.] Finish the proof of the Heine-Borel Theorem by proving the infinite case for $P$. (Here you will need to use the assumption that $E$ is closed!)
+    \item[2.] Let $d^* : \mathbb{R}^2 \times \mathbb{R}^2 \to [0, \infty)$ be given by
+    \begin{align*}
+        d^{*}(\mathbf{p}, \mathbf{q}) = |p_1 - q_1| + |p_2 - q_2|
+    \end{align*}
+    (note that $\mathbf{p} = (p_1, p_2)$ and $\mathbf{q} = (q_1, q_2)$). Prove that $d^{*}$ is a metric on $\mathbb{R}^2$. We refer to this as the \emph{$\ell_1$-metric} on $\mathbb{R}^2$. (The $\ell_p$-metric, where $p \in [1, \infty)$, is given by $d_{\ell_p}(\mathbf{p}, \mathbf{q}) = (|p_1 - q_1|^p + |p_2 - q_2|^p)^{1/p}$. When $p = \infty$, $d_{l_\infty}(\mathbf{p}, \mathbf{q}) = \sup \lbrace |p_1 - q_1|, |p_2 - q_2| \rbrace$.)
+    \item[3.] Let $\mathbf{x} = (x_1, x_2, \ldots, x_n) \in \mathbb{R}^n$. We define a set $A \subseteq \mathbb{R}^n$ to be \emph{bounded} if there exists $M \geq 0$ such that $||\mathbf{x}|| = \sqrt{x_1^2 + x_2^2 + \ldots + x_n^2} \leq M$ for all $\mathbf{x} \in A$.
+    \begin{enumerate}
+        \item[(a)] Reread the definition of the closure of a set in $\mathbb{R}$. Deduce a reasonable definition for the closure of a set in $\mathbb{R}^n$.
+        \item[(b)] Prove that if $D \subseteq \mathbb{R}^n$ is bounded, then $\overline{D}$ is bounded.
+        \item[(c)] Let $A \subseteq \mathbb{R}^n$. Recall the definition of a compact set that you deduced in Exercise 1(a). Prove that $A$ is compact if and only if $A$ is closed and bounded.
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
