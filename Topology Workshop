@@ -1,0 +1,158 @@
+\documentclass[12pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[mathlines]{lineno}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{setspace}
+\usepackage{subfigure}
+\usepackage{float}
+\onehalfspacing
+\newtheorem{proposition}{Proposition}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\newtheorem{exercise}{Exercise}
+\newcommand{\seq}[2]{\left( #1 \right)_{#2 = 1}^{\infty}}
+ \geometry{
+ letterpaper,
+ left=20mm,
+ top=30mm,
+ }
+\usepackage{graphicx}
+
+\begin{document}
+\raggedbottom
+
+\begin{center}\section*{Workshop 5: Topology on $\mathbb{R}$ -- Open and Closed Sets}\end{center}
+
+You have already seen the lectures on open and closed sets in the usual manner. However, in this workshop, we will view the introductory material of topology on $\mathbb{R}$ from another perspective. We will instead start with closed sets instead of open sets. \\
+
+\begin{definition}
+    \emph{Let $A \subseteq \mathbb{R}$. We say that $x$ is a \emph{limit point} of $A$ if for any $\epsilon > 0$,}
+    \begin{align*}
+        (V_\epsilon(x) \backslash \lbrace x \rbrace) \cap A \neq \emptyset.
+    \end{align*}
+\end{definition}
+
+\begin{example}
+    \emph{Determine the set of all limit points from the following sets:
+    \begin{enumerate}
+        \item[(a)] $(a, b)$.
+        \item[(b)] $\mathbb{Q}$.
+        \item[(c)] $\bigcap_{n = 1}^{\infty}(a - 1/n, b]$.
+        \item[(d)] $\mathbb{N}$.
+    \end{enumerate}
+    }
+\end{example}
+\vspace{100pt}
+
+\begin{example}
+    \emph{Consider the closed interval $[0, 1]$. We will consider why it is invalid to say that open and closed are negations of each other. Note that every $x \in [0, 1]$ is a limit point of $[0, 1]$ and has no other limit points. So, to make the set not closed, we need to remove some limit points from $[0, 1]$. If we \lq\lq prune" this set down to $[0, 1] \cap \mathbb{Q}$, then clearly we have removed \lq\lq almost every" point from $[0, 1]$ as well as its limit points, while still having all the same limit points. But is $[0, 1] \cap \mathbb{Q}$ an open set? Why or why not?}
+\end{example}
+
+\pagebreak
+
+Now we will consider the following question: why is a closed set called a closed set? First, we need to define a closed set:
+
+\begin{definition}
+    \emph{Let $A \subseteq \mathbb{R}$. We say that $A$ is a \rule{4cm}{0.15mm} if $A$ contains all of its \rule{4cm}{0.15mm}}.
+\end{definition}
+
+Now consider the following: define $\times : Y \times Y \to Y$ to be a function. We say that $\times$ is a \emph{binary operation} on $Y$ since for any $a, b \in Y$, $\times (a, b) \in Y$. Of course, we never use this notation and always write this as $a \times b$. But the point is that \emph{when we have the existence of a binary operation $\times$ on $Y$, we say that $Y$ is \textbf{closed} under $\times$}.
+
+Alternatively, the thought process can be considered as follows: you start with a function $\times$ and two elements. If the product of those elements is not in the set, add that new element to the set and multiply everything together. If you obtain more new elements, continue this process until eventually you no longer obtain any new elements. We can now say that the $\times$ operation \lq \lq closes" the set.
+
+\begin{example}
+    \emph{Consider the set $\mathbb{Q}$. Using the fact that, whenever $c \neq 0$ and $d \neq 0$, $\dfrac{a}{b} + \dfrac{c}{d} = \dfrac{ad + bc}{bd}$, explain why $\mathbb{Q}$ is closed under addition.}
+\end{example}
+\vspace{100pt}
+
+\textbf{Question.} Now let's recall the following theorem in your book: \emph{A set $A \subseteq \mathbb{R}$ is closed if and only if every Cauchy sequence in $A$ converges to a point in $A$.} If we are going to understand why the idea behind \lq \lq closed" explained above makes sense, what \lq\lq operation", whether it is binary or not, would need to be considered? And what does that operation need to act on?
+
+\pagebreak
+
+\begin{exercise}
+    \emph{Let $U, A \subseteq \mathbb{R}$. Prove that if $U$ is open in $\mathbb{R}$ and $A$ is closed in $\mathbb{R}$, then $U \backslash A$ is open in $\mathbb{R}$ and $A \backslash U$ is closed in $\mathbb{R}$.}
+\end{exercise}
+
+\begin{enumerate}
+\setlength{\itemsep}{70pt}
+    \item[(a)] Since $A$ is closed in $\mathbb{R}$, what does that imply about $A^{c}$?
+    \item[(b)] Using (a), prove that $U \backslash A$ is open in $\mathbb{R}$.
+    \item[(c)] Since $U$ is open in $\mathbb{R}$, what does that imply about $U^{c}$?
+    \item[(d)] Using (b), prove that $A \backslash U$ is closed in $\mathbb{R}$.
+    \vspace{70pt}
+\end{enumerate}
+
+\begin{exercise}
+    \emph{Prove the following two assertions:
+    \begin{enumerate}
+        \item[(i)] The union of a finite collection of closed sets is closed.
+        \item[(ii)] The intersection of an arbitrary collection of closed sets is closed. \\
+    \end{enumerate}
+    }
+\end{exercise}
+
+\begin{enumerate}
+    \setlength{\itemsep}{120pt}
+    \item[(a)] We start with (i). Let $\lbrace F_k \rbrace_{k = 1}^{n}$, with $n \in \mathbb{N}$, be a collection of closed sets in $\mathbb{R}$. What kind of set is $F_k^c$?
+    \item[(b)] What does DeMorgan's Laws tell us about $\bigcup_{k = 1}^{n}F_k$? [\emph{Hint}: $F_k = (F_k^c)^c$.]
+    \item[(c)] What kind of set is $\bigcap_{k = 1}^n F_k^c$?
+    \item[(d)] Using (a)-(c), prove (i).
+    \item[(e)] Using a similar process to (a)-(d), write a proof for (ii).
+\end{enumerate}
+
+\pagebreak
+
+\begin{exercise}
+    \emph{Prove that the Cantor set is closed}.
+\end{exercise}
+
+\begin{enumerate}
+\setlength{\itemsep}{120pt}
+    \item[(a)] Let $C_0$ be the closed interval $[0, 1]$, and for any $n \in \mathbb{N}$, let $C_n$ be the set that results from removing the middle thirds of all the intervals in $C_{n - 1}$. Using this idea, construct $C_0, C_1, \ldots, C_5$.
+    \item[(b)] Using (a), make a deduction about the type of intervals contained in $C_n$ for every $n \in \mathbb{N}$.
+    \item[(c)] Using Exercise 2, prove that $C_n$ is closed for every $n \in \mathbb{N}$.
+    \item[(d)] Let $\mathscr{C} = \bigcap_{n = 1}^{\infty} C_n$. This by definition is the Cantor set. Prove that $\mathscr{C}$ is closed.
+\end{enumerate}
+
+\pagebreak
+
+\subsection*{Extra Practice}
+
+\begin{exercise}
+    \emph{Let $\lbrace A_k \rbrace_{k = 1}^{n}$, with $n \in \mathbb{N}$, be a collection of subsets of $\mathbb{R}$. Prove that}
+    \begin{align*}
+        \bigcup_{k = 1}^n \overline{A_k} = \overline{\bigcup_{k = 1}^n A_k}.
+    \end{align*}
+    \emph{Does this result extend to infinite unions of subsets of $\mathbb{R}$? What about finite intersections? Infinite intersections? Relative complements?}
+\end{exercise}
+
+\begin{exercise}
+    \emph{Let $A \subseteq \mathbb{R}$. Consider the following definitions:
+    \begin{enumerate}
+        \item[(i)] \textbf{Interior}: The \emph{interior} of $A$ is given by $A^{o} = \lbrace x \in A : V_{\epsilon}(x) \subseteq A \text{ for some $\epsilon > 0$}\rbrace$.
+        \item[(ii)] \textbf{Exterior}: The \emph{exterior} of $A$ is given by $\text{ext}(A) = (\mathbb{R} \backslash A)^{o}$.
+        \item[(iii)] \textbf{Boundary}: The \emph{boundary} of $A$ is given by $\partial A = \overline{A} \cap \overline{\mathbb{R} \backslash A}$.
+    \end{enumerate}
+    Using these definitions, prove the following:
+    \begin{enumerate}
+        \item[(a)] $A^{o}$ and $\text{ext}(A)$ are open subsets of $\mathbb{R}$.
+        \item[(b)] $A^{o}, \text{ext}(A)$, and $\partial A$ are all pairwise disjoint.
+        \item[(c)] $A$ is open if and only if $A = A^{o}$.
+        \item[(d)] $A$ is closed if and only if $\partial A \subseteq A$.
+        \item[(e)] $\mathbb{R} = A^{o} \cup \text{ext}(A) \cup \partial A$.
+        \item[(f)] $\overline{A} = A^{o} \cup \partial A$.
+        \item[(g)] If $A \subseteq B \subseteq \mathbb{R}$, then $A^{o} \subseteq B^{o}$.
+    \end{enumerate}}
+\end{exercise}
+
+\end{document}
