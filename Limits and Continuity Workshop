@@ -1,0 +1,181 @@
+\documentclass[12pt]{extarticle}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage[mathlines]{lineno}
+\usepackage{fancyhdr}
+\usepackage{geometry}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{multicol}
+\usepackage{enumitem}
+\usepackage{framed}
+\usepackage{setspace}
+\onehalfspacing
+\newtheorem{theorem}{Proposition}
+\newtheorem{theorem2}{Theorem}
+\newtheorem{theorem3}{Lemma}
+\newtheorem{theorem4}{Definition}
+\newtheorem*{theorem5*}{Remark}
+\newtheorem{theorem6}{Exercise}
+\newtheorem*{pictorial*}{Pictorial Representation}
+\newtheorem*{thomae*}{Thomae's Function}
+ \geometry{
+ letterpaper,
+ left=20mm,
+ top=30mm,
+ }
+
+\begin{document}
+\raggedbottom
+
+\begin{center}\section*{Workshop 7: Functional Limits, Continuous Functions}\end{center}
+
+Limits are nothing new to you. You have spent more than a year of your academic career working with limits, including derivatives, partial derivatives, definite integrals, line integrals, and so on. However, up until real analysis, you probably have not seen an actual definition of limits, which is what we will spend this workshop discussing.
+
+Before we discuss limits, let's review \emph{limit points}.
+\vspace{10pt}
+\begin{theorem4}
+    \emph{Let $A \subseteq \mathbb{R}^m$, $x_0 \in \mathbb{R}^m$, and $V_\epsilon(x_0) = \lbrace x \in \mathbb{R}^m : ||x - x_0|| < \epsilon \rbrace$, where $\epsilon > 0$. We say that $x_0$ is a \emph{limit point} of $A$ if for every $\epsilon > 0$, $(V_\epsilon(x_0) \backslash \lbrace x_0 \rbrace) \cap A \neq \emptyset$.}
+\end{theorem4}
+\vspace{1pt}
+What does this definition mean intuitively?
+
+\begin{pictorial*}
+\end{pictorial*}
+
+\vspace{170pt}
+
+Let's now look at some examples of limit points of subsets of $\mathbb{R}$.
+
+\begin{theorem6}
+    \emph{Determine the set of all limit points, or \emph{closure}, of the following subsets of $\mathbb{R}$. If the limits point are in the set, give a brief explanation. For limit points outside the set, write a more rigorous explanation.}
+\end{theorem6}
+
+\begin{enumerate}
+    \item[(a)] $Q := \lbrace \frac{1}{n} : n \in \mathbb{N} \rbrace$
+    \pagebreak
+    \item[(b)] The open interval $(a, b)$, where $a, b \in \mathbb{R}$ such that $a < b$.
+    \vspace{100pt}
+\end{enumerate}
+
+We now provide a working definition of limits of real-valued functions.
+
+\begin{theorem4}
+    \emph{Let $A \subseteq \mathbb{R}$ and $f : A \to \mathbb{R}$ be a function. Define $a \in \mathbb{R}$ to be a limit point of $A$ and $L \in \mathbb{R}$. We say that}
+    \begin{align*}
+        \lim_{x \to a} f(x) = L
+    \end{align*}
+    \emph{if for every $\epsilon > 0$, there exists $\delta > 0$ such that}
+    \begin{align*}
+        |f(x) - L| < \epsilon \text{ \emph{for every $x \in A$ such that} } 0 < |x - a| < \delta.
+    \end{align*}
+\end{theorem4}
+
+\textbf{Question.} Why do we care that $a$ is a limit point of the domain of $f$? [\emph{Hint}: Consider the negation of the definition of a limit point and the condition $0 < |x - a| < \delta$.]
+\vspace{100pt}
+
+\begin{theorem6}
+    Prove that
+    \begin{align*}
+        \lim_{x \to 2} x^3 = 8.
+    \end{align*}
+\end{theorem6}
+
+\begin{enumerate}
+    \setlength{\itemsep}{120pt}
+    \item[(a)] The scratch work is a critical part of figuring out this proof. So, noting the definition of the limit, what statement/inequality do we need to end with?
+    \item[(b)] Factor $x^3 - 8$. What does $|x^3 - 8|$ equal?
+    \item[(c)] Notice that we ended with a factor of $|x - 2|$ in the expression above. Now let's note that for the $\delta > 0$ condition, we only need \emph{existence}, not \emph{universality}. Therefore, it is acceptable to try different choices of $\delta$ in order to obtain the statement in (a). Let's try $\delta = 1$. So, we are assuming $|x - 2| < 1$. What will this imply about the other factor of $|x^3 - 8|$?
+    \item[(d)] Given what you wrote above, you probably obtained $|x^3 - 8| < b|x - 2|$ for some constant $b$. But we need to set $b|x - 2| < \epsilon$ since we want $|x^3 - 8| < \epsilon$. So $|x - 2| < \frac{\epsilon}{b}$. What is this $b$? And since there are now two conditions on $|x - 2|$ given our initial assumption that $|x - 2| < 1$, what should we set $\delta$ equal to?
+    \pagebreak
+    \item[(e)] Using all of this scratch work, now write a rigorous proof that $\lim_{x \to 2} x^3 = 8$.
+    \vspace{300pt}
+\end{enumerate}
+
+\subsection*{Continuous Functions}
+
+Chances are that when you think of a real-valued function that is continuous on its entire domain, most likely you will think of a smooth curve like a polynomial (and as it turns out, \emph{any} continuous real-valued function can be very closely approximated by a polynomial according to the Weierstrass Approximation Theorem). However, all of those functions that you are thinking of also have the property of being differentiable. But what if a function were not continuous on its whole domain?
+    
+First, before we discuss examples of continuity and discontinuity, we need a working definition of continuity aside from just \lq\lq if you can draw a graph without picking up your pencil..." Because we will see later in this activity that this intuition does not accurately represent continuity.
+
+\pagebreak
+
+\textbf{Defintion of Continuity.} Using what you learned from class, write a working definition of continuity in $\mathbb{R}$. After stating the definition, write below it the negation of the definition.
+\vspace{120pt}
+
+\begin{enumerate}
+    \setlength{\itemsep}{150pt}
+    \item[(a)] Let $f: \mathbb{R} \to \mathbb{R}$ be the function defined by
+        \begin{align*}
+            f(x) = \begin{cases}
+            x & \mathrm{if} \; x \in \mathbb{Q}, \\
+            0 & \mathrm{if} \; x \in \mathbb{R} - \mathbb{Q}.
+        \end{cases}
+        \end{align*}
+    Is $f$ continuous at $x = 0$? What about at any $x \neq 0$?
+    \item[(b)] Give two examples of a function $f$ with $\text{dom}(f) = \mathbb{R}$ that is \emph{not} continuous on its whole domain. Write a brief explanation for the discontinuities of the functions you come up with.
+    \begin{enumerate}
+        \setlength{\itemsep}{150pt}
+        \item[(i)] Example 1
+        \item[(ii)] Example 2
+        \vspace{150pt}
+    \end{enumerate}
+\end{enumerate}
+
+Intuitively, it seems that continuity is only possible at either a single point or on an interval. However, the following function completely breaks that intuition.
+
+\begin{thomae*}
+    \emph{Let $x = p/q$, where $p \in \mathbb{Z} - \lbrace 0 \rbrace$, $q \in \mathbb{N}$, and $\gcd(p, q) = 1$. Let $f : \mathbb{R} \rightarrow \mathbb{R}$ be the function given by}
+    \begin{align*}
+        f(x) = \begin{cases}
+            1/q & \mathrm{if} \; x = p/q, \\
+            1 & \mathrm{if} \; x = 0, \\
+            0 & \mathrm{if} \; x \in \mathbb{R} - \mathbb{Q}.
+        \end{cases}
+    \end{align*}
+    \emph{$f$ is called \emph{Thomae's Function} and has the counterintuitive property of being continuous at all irrational numbers and discontinuous at all rational numbers.}
+\end{thomae*}
+
+\begin{enumerate}
+    \item[(b)] Now we will try to prove the claim above! We will only prove discontinuity at all rational numbers, and the proof of continuity at all irrational numbers is left to you. If you try the proof and get stuck, make a tutoring appointment with me!
+    \begin{enumerate}
+        \setlength{\itemsep}{140pt}
+        \item[(i)] We'll try to prove this using the $\epsilon-\delta$ property of continuity. But we are proving \emph{discontinuity}, so we need the negation of the $\epsilon-\delta$ property. Using the fact that we are working with $\mathbb{R}$, write the negation of the $\epsilon-\delta$ property.
+        \pagebreak
+        \item[(ii)] Let $\delta > 0$ and $a \in \mathbb{Q}$. Consider the open interval $(a - \delta, a + \delta)$. What does the denseness property of the set of irrational numbers tell us about $(a - \delta, a + \delta)$?
+        \item[(iii)] Play around a little bit with the negation of $\epsilon-\delta$ property. What should we define $\epsilon$ to be?
+        \item[(iv)] Now that you've brainstormed above, write a complete proof that Thomae's function is discontinuous at every rational number.
+    \end{enumerate}
+\end{enumerate}
+
+\pagebreak
+
+\textbf{Extra Practice}
+
+\begin{enumerate}
+    \item[1.] Let $f : \mathbb{R} \to \mathbb{R}$ be a function with the property that for some $M > 0$, $|f(x)| \leq Mx^2$ for all $x \in \mathbb{R}$. Prove that $\lim\limits_{x \to 0}f(x) = 0$ and $\lim\limits_{x \to 0} \dfrac{f(x)}{x} = 0$.
+    \item[2.] Prove that Thomae's Function is continuous at every irrational number. Remember, make an appointment with me if you get stuck!
+    \item[3.] Let $f : \mathbb{R} \to \mathbb{R}$ have the property that $f(x + y) = f(x) + f(y)$ for all $x, y \in \mathbb{R}$.
+    \begin{enumerate}
+        \item[(a)] Prove that if $f$ is continuous at $0$, $f$ is continuous for all $x \in \mathbb{R}$.
+        \item[(b)] Prove that if $m = f(1)$, then $f(x) = mx$ for all $x \in \mathbb{Q}$.
+    \end{enumerate}
+    \item[4.] Let $A \subseteq \mathbb{R}$, $f : A \to \mathbb{R}$ be a function, and $x_0 \in A$. You may recall that with the floor function discussed in class, we only needed to use the increasing sequence $(-1/n)_{n = 1}^{\infty}$ to prove that the floor function is discontinuous at $0$. But can we get away with using only monotonic sequences to verify continuity of a function? Yes!
+
+    Prove that $f$ is continuous if and only if for any monotonic sequence $(x_n)_{n = 1}^{\infty}$ in $A$ such that $\lim\limits_{n \to \infty}x_n = x_0$, $\lim\limits_{n \to \infty} f(x_n) = f(x_0)$. (\emph{Note that this essentially says that we need $x_0 \in A$ and for the left and right limits to agree at $x_0$}.)
+    \item[5.] Let $A \subseteq \mathbb{R}$ be nonempty and define $D_A : \mathbb{R} \to [0, \infty)$ by $D_A(x) = \inf \lbrace |x - a| : a \in A \rbrace$. We define this to be the \emph{distance} from $x$ to $A$.
+    \begin{enumerate}
+        \item[(a)] Prove that $D_A$ is continuous on $\mathbb{R}$. [\emph{Hint}: First show that $D_A(x) \leq |x - a| \leq |x - y| + |y - a|$ for $a \in A$ and $y \in \mathbb{R}$. Hence, $D_A(x) - |x - y| \leq |y - a|$ for all $a \in A$. Therefore, what must $D_A(x) - |x - y|$ be no larger than?]
+        \item[(b)] \textbf{Urysohn's Lemma for $\mathbb{R}$.} (Challenge) Let $A, B \subseteq \mathbb{R}$ that are nonempty, disjoint, and closed in $\mathbb{R}$. Define $f$ to be the function on $\mathbb{R}$ given by
+        \begin{align*}
+            f(x) = \frac{D_A(x)}{D_A(x) + D_B(x)}
+        \end{align*}
+        \begin{enumerate}
+            \item[(i)] Prove that $f$ is well-defined [\emph{Hint}: Using that $A$ and $B$ are closed and disjoint, show that $D_A(x) + D_B(x) \neq 0$ for all $x \in \mathbb{R}$] and continuous.
+            \item[(ii)] Prove that $\text{range}(f) \subseteq [0, 1]$. (The reverse inclusion is false!)
+            \item[(iii)] Prove that $f(x) = 0$ for all $x \in A$ and $f(x) = 1$ for all $x \in B$. 
+        \end{enumerate}
+    \end{enumerate}
+\end{enumerate}
+
+\end{document}
